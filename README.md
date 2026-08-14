@@ -1,10 +1,8 @@
 # PASTIS Crop-Type Classification
 
-Solafune Geo Data Scientist take-home assignment: exploring a 102-patch
-subset of the [PASTIS](https://github.com/VSainteuf/pastis-benchmark)
-dataset (multi-temporal Sentinel-2 + semantic crop-type labels) and building
-a crop classification pipeline. Full narrative writeup is in
-[`report.md`](report.md); this README covers setup and reproduction.
+Exploring a 102-patch subset of the [PASTIS](https://github.com/VSainteuf/pastis-benchmark) dataset 
+(multi-temporal Sentinel-2 + semantic crop-type labels) and building a crop classification pipeline. 
+Full narrative writeup is in [`report.md`](report.md); this README covers setup and reproduction.
 
 ## 1. Project overview
 
