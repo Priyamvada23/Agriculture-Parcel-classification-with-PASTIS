@@ -1,0 +1,40 @@
+# Superseded planning draft, written before the real data was inspected.
+# Kept locally for history; not part of the deliverable and contradicts the
+# repo as built (it still lists open decisions and a synthetic-data fallback).
+SPEC.md
+
+# The assignment brief is Solafune's document -- kept locally, not redistributed.
+Geo Data Scientist Assignment.pdf
+
+# Data (too large for git; see README for how to obtain/place it)
+PASTIS_subset/
+
+# Derived NDVI cache (~300MB, regenerate with: python src/build_ndvi_cache.py)
+cache/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+
+# Model weights.
+# The neural checkpoints are small (1-2 MB) and ARE committed: unlike the tree
+# models they are not verified bit-reproducible from the seed, so shipping the
+# weights is the only way to guarantee the exact model.
+# The tree models are not committed -- an unpruned 300-tree forest is ~90 MB
+# even compressed, past GitHub's 50 MB warning threshold. They retrain
+# bit-identically from the seed in minutes; see README section 7.
+outputs/models/*.joblib
+outputs/models/*.pkl
+# Superseded 10-epoch U-Net checkpoint, kept locally for the epoch comparison
+outputs/models/dl10ep_model.pt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Env
+.venv/
+venv/

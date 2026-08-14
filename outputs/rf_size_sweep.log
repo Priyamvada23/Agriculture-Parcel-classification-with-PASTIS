@@ -1,0 +1,16 @@
+building NDVI feature table (66 train patches)...
+  leaf=1     90.1 MB  3,901,804 nodes  val_acc=0.8558  val_macroF1=0.4358  (189s)
+  leaf=2     84.2 MB  3,318,292 nodes  val_acc=0.8552  val_macroF1=0.4394  (181s)
+  leaf=5     69.7 MB  2,262,150 nodes  val_acc=0.8561  val_macroF1=0.4424  (156s)
+  leaf=10    57.1 MB  1,560,660 nodes  val_acc=0.8539  val_macroF1=0.4429  (145s)
+  leaf=20    44.2 MB  1,020,798 nodes  val_acc=0.8473  val_macroF1=0.4342  (132s)
+
+ min_samples_leaf  size_mb  total_nodes  val_accuracy  val_macro_f1  fit_s
+                1     90.1      3901804        0.8558        0.4358  189.0
+                2     84.2      3318292        0.8552        0.4394  181.4
+                5     69.7      2262150        0.8561        0.4424  156.1
+               10     57.1      1560660        0.8539        0.4429  145.4
+               20     44.2      1020798        0.8473        0.4342  131.7
+wrote E:\Agri-Assignment_01\outputs\metrics\rf_size_sweep_val.csv
+
+best val macro-F1: min_samples_leaf=10 (0.4429, 57.1 MB)

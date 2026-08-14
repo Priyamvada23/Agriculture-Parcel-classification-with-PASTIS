@@ -1,0 +1,19 @@
+CUDA requested but not available -> falling back to CPU (this will be slow; see README for running the full training on Google Colab).
+=== Deep learning track: Temporal-Attention U-Net (device=cpu) ===
+Computing per-band normalization stats from the training split...
+model parameters: 491,253
+epoch   1/10  train_loss=2.9537  val_acc=0.0370  val_macro_f1=0.0171  (182.7s)
+epoch   2/10  train_loss=2.6210  val_acc=0.2551  val_macro_f1=0.1300  (182.1s)
+epoch   3/10  train_loss=2.4095  val_acc=0.4027  val_macro_f1=0.1781  (182.5s)
+epoch   4/10  train_loss=2.2544  val_acc=0.4922  val_macro_f1=0.2267  (178.1s)
+epoch   5/10  train_loss=2.1959  val_acc=0.4036  val_macro_f1=0.1976  (161.2s)
+epoch   6/10  train_loss=2.1005  val_acc=0.4700  val_macro_f1=0.2006  (157.6s)
+epoch   7/10  train_loss=2.0681  val_acc=0.4761  val_macro_f1=0.2320  (157.8s)
+epoch   8/10  train_loss=1.8936  val_acc=0.4476  val_macro_f1=0.1891  (157.5s)
+epoch   9/10  train_loss=1.8375  val_acc=0.4079  val_macro_f1=0.2044  (157.1s)
+epoch  10/10  train_loss=1.8575  val_acc=0.6130  val_macro_f1=0.2683  (151.9s)
+saved best checkpoint (val_macro_f1=0.2683) to E:\Agri-Assignment_01\outputs\models\dl_model.pt
+[dl_val] accuracy=0.6130 macro_f1=0.2683 weighted_f1=0.6209 mean_iou=0.2058
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/dl_val_*
+[dl_test] accuracy=0.5982 macro_f1=0.2932 weighted_f1=0.6206 mean_iou=0.2435
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/dl_test_*

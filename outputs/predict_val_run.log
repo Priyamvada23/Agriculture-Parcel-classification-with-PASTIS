@@ -1,0 +1,18 @@
+
+=== ml_xgb on val (18 patches) ===
+[ml_xgb_val] accuracy=0.7062 macro_f1=0.2768 weighted_f1=0.7342 mean_iou=0.2765
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ml_xgb_val_*
+[ml_xgb_val_withbg] accuracy=0.7166 macro_f1=0.2915 weighted_f1=0.7188 mean_iou=0.2669
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ml_xgb_val_withbg_*
+
+=== ml_rf on val (18 patches) ===
+[ml_rf_val] accuracy=0.6261 macro_f1=0.2350 weighted_f1=0.6550 mean_iou=0.2267
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ml_rf_val_*
+[ml_rf_val_withbg] accuracy=0.6575 macro_f1=0.2519 weighted_f1=0.6591 mean_iou=0.2095
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ml_rf_val_withbg_*
+
+=== dl on val (18 patches) ===
+[dl_val] accuracy=0.7715 macro_f1=0.4086 weighted_f1=0.8222 mean_iou=0.3642
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/dl_val_*
+[dl_val_withbg] accuracy=0.6767 macro_f1=0.4003 weighted_f1=0.7220 mean_iou=0.3324
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/dl_val_withbg_*

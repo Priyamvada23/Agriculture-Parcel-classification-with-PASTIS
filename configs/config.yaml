@@ -1,0 +1,174 @@
+# Project configuration for PASTIS crop-type classification assignment.
+# Paths are relative to the project root.
+
+data:
+  root: "PASTIS_subset"
+  s2_dir: "PASTIS_subset/DATA_S2"
+  annotations_dir: "PASTIS_subset/ANNOTATIONS"
+  metadata_geojson: "PASTIS_subset/metadata.geojson"
+
+  # Confirmed from inspecting the provided subset (see notebooks/exploration_and_training.ipynb, EDA section):
+  n_patches: 102
+  patch_size: 128          # H, W in pixels
+  n_bands: 10               # Sentinel-2 bands
+  n_timesteps: 46           # uniform across all 102 patches in this subset
+  tile: "t31tfm"             # single Sentinel-2 tile covered by this subset
+
+# Derived-product cache. NDVI is computed from only 2 of the 10 bands, but
+# deriving it requires reading the whole (T,10,H,W) array (~15MB/patch, ~60MB
+# once cast to float32). Every NDVI experiment paid that cost repeatedly, so
+# the NDVI cube is precomputed once and cached as float32 (~3MB/patch).
+# Values are the exact float32 array compute_ndvi() produces, so cached and
+# on-the-fly runs are bit-identical -- see src/build_ndvi_cache.py --verify.
+cache:
+  use_ndvi_cache: true
+  ndvi_dir: "cache/ndvi"
+
+bands:
+  # index: [S2 band, common name]
+  0: {band: B2,  name: Blue}
+  1: {band: B3,  name: Green}
+  2: {band: B4,  name: Red}
+  3: {band: B5,  name: "Red Edge 1"}
+  4: {band: B6,  name: "Red Edge 2"}
+  5: {band: B7,  name: "Red Edge 3"}
+  6: {band: B8,  name: "Near Infrared"}
+  7: {band: B8A, name: "Narrow Near Infrared"}
+  8: {band: B11, name: "Short-Wave Infrared 1"}
+  9: {band: B12, name: "Short-Wave Infrared 2"}
+
+# RGB composite band indices (true color) used for visualization.
+rgb_bands: [2, 1, 0]   # Red, Green, Blue
+
+classes:
+  0:  Background
+  1:  Meadow
+  2:  "Soft winter wheat"
+  3:  Corn
+  4:  "Winter barley"
+  5:  "Winter rapeseed"
+  6:  "Spring barley"
+  7:  Sunflower
+  8:  Grapevine
+  9:  Beet
+  10: "Winter triticale"
+  11: "Winter durum wheat"
+  12: "Fruits, vegetables, flowers"
+  13: Potatoes
+  14: "Leguminous fodder"
+  15: Soybeans
+  16: Orchard
+  17: "Mixed cereal"
+  18: Sorghum
+  19: Void
+
+background_class: 0
+void_class: 19
+
+split:
+  # Official PASTIS 5-fold spatial CV assignment (from metadata.geojson "Fold" field).
+  # Using folds directly (rather than a random shuffle) avoids spatial leakage between
+  # nearby patches that a random split could introduce.
+  strategy: official_folds
+  train_folds: [1, 2, 3]
+  val_folds: [4]
+  test_folds: [5]
+  splits_dir: "configs/splits"
+  seed: 42
+
+preprocessing:
+  # Per-pixel temporal statistics computed per band for the traditional ML track.
+  stats: [mean, std, min, max, slope]
+  indices: [ndvi, ndwi]
+  # Max pixels sampled per patch per class when building the ML training table
+  # (full 128x128x102 pixel set is ~1.67M rows; this keeps training tractable
+  # on CPU while remaining class-stratified). See preprocessing.py docstring.
+  max_pixels_per_patch_per_class: 400
+
+model_ml:
+  algorithms: [random_forest, xgboost]
+  random_forest:
+    n_estimators: 300
+    max_depth: 20
+    class_weight: balanced
+    n_jobs: -1
+    random_state: 42
+  xgboost:
+    n_estimators: 400
+    max_depth: 8
+    learning_rate: 0.05
+    tree_method: hist
+    random_state: 42
+
+# Track C: Random Forest on the raw *ordered* NDVI time series (one feature
+# per acquisition date). Hyperparameters are deliberately identical to
+# model_ml.random_forest so the only difference vs. Track A is the feature
+# representation -- statistics (order-invariant) vs. ordered series (keeps
+# phenological timing).
+model_ndvi:
+  features: ndvi_time_series
+  algorithm: random_forest
+  random_forest:
+    n_estimators: 300
+    max_depth: 20
+    class_weight: balanced
+    n_jobs: -1
+    random_state: 42
+
+# Track D: 1D temporal CNN (TempCNN-style) on the same ordered NDVI series as
+# Track C. Same features, different model class -- isolates "tree vs. neural
+# net" with the representation held fixed. Cheap enough to train to
+# convergence on CPU, unlike the patch-level U-Net.
+model_ndvi_dl:
+  architecture: tempcnn_1d
+  channels: 64
+  hidden_dim: 256
+  dropout: 0.3
+  batch_size: 512
+  epochs: 40
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  device: cuda   # falls back to cpu automatically if unavailable
+
+model_dl:
+  architecture: unet_temporal
+  # Temporal dimension is collapsed via a lightweight temporal encoder (per-pixel
+  # GRU/1D-conv over T) before a small U-Net spatial decoder — sized to be
+  # trainable on a single Colab GPU (or slow on CPU) given only ~66 training patches.
+  temporal_hidden_dim: 64
+  unet_base_channels: 32
+  batch_size: 4
+  epochs: 40
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  device: cuda   # falls back to cpu automatically if unavailable
+
+evaluation:
+  metrics: [accuracy, macro_f1, weighted_f1, per_class_precision_recall_f1, confusion_matrix, mean_iou]
+
+  # PRIMARY protocol: crop pixels only.
+  # The task is crop-type classification, so metrics are computed over pixels
+  # whose ground truth is an actual crop class (1-18). Class 19 (void) has no
+  # ground truth, and class 0 (background) is non-crop land cover -- neither is
+  # a crop-classification outcome, so neither is scored.
+  #
+  # Background remains a TRAINING class: the model must be able to output
+  # "background" or it would be forced to assign a crop to roads, buildings and
+  # woodland. Only the scoring changes, not the model.
+  #
+  # Known blind spot, quantified in report.md: because background-truth pixels
+  # are dropped, a crop prediction made ON background is not penalised. For the
+  # delivered model 23.8% of background pixels are predicted as some crop
+  # (mostly Meadow), which is why crop-only precision runs optimistic. The
+  # reference protocol below retains background so this stays visible.
+  ignore_classes: [0, 19]
+
+  # REFERENCE protocol: background retained as a scored class. Written to
+  # *_withbg_* metric files alongside the primary ones.
+  reference_ignore_classes: [19]
+
+output:
+  figures_dir: "outputs/figures"
+  metrics_dir: "outputs/metrics"
+  predictions_dir: "outputs/predictions"
+  models_dir: "outputs/models"

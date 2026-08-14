@@ -1,0 +1,17 @@
+  20/102 patches (57s elapsed)
+  40/102 patches (113s elapsed)
+  60/102 patches (171s elapsed)
+  80/102 patches (228s elapsed)
+  100/102 patches (286s elapsed)
+  102/102 patches (292s elapsed)
+
+wrote 102 patches, skipped 0 existing, in 292s
+cache: E:\Agri-Assignment_01\cache\ndvi  (308 MB for 102 patches)
+
+  patch 30003: shape (46, 128, 128) dtype float32 bit-identical=True
+  patch 30013: shape (46, 128, 128) dtype float32 bit-identical=True
+  patch 30014: shape (46, 128, 128) dtype float32 bit-identical=True
+  patch 30023: shape (46, 128, 128) dtype float32 bit-identical=True
+  patch 30026: shape (46, 128, 128) dtype float32 bit-identical=True
+
+VERIFY: cache matches on-the-fly computation exactly

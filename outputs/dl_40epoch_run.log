@@ -1,0 +1,49 @@
+CUDA requested but not available -> falling back to CPU (this will be slow; see README for running the full training on Google Colab).
+=== Deep learning track: Temporal-Attention U-Net (device=cpu) ===
+Computing per-band normalization stats from the training split...
+model parameters: 491,253
+epoch   1/40  train_loss=2.9537  val_acc=0.0370  val_macro_f1=0.0171  (189.3s)
+epoch   2/40  train_loss=2.6210  val_acc=0.2551  val_macro_f1=0.1300  (189.9s)
+epoch   3/40  train_loss=2.4095  val_acc=0.4027  val_macro_f1=0.1781  (727.8s)
+epoch   4/40  train_loss=2.2544  val_acc=0.4922  val_macro_f1=0.2267  (839.7s)
+epoch   5/40  train_loss=2.1959  val_acc=0.4036  val_macro_f1=0.1976  (195.0s)
+epoch   6/40  train_loss=2.1005  val_acc=0.4700  val_macro_f1=0.2006  (192.1s)
+epoch   7/40  train_loss=2.0681  val_acc=0.4761  val_macro_f1=0.2320  (205.6s)
+epoch   8/40  train_loss=1.8936  val_acc=0.4476  val_macro_f1=0.1891  (188.1s)
+epoch   9/40  train_loss=1.8375  val_acc=0.4079  val_macro_f1=0.2044  (185.3s)
+epoch  10/40  train_loss=1.8575  val_acc=0.6130  val_macro_f1=0.2683  (258.6s)
+epoch  11/40  train_loss=1.7446  val_acc=0.5728  val_macro_f1=0.2609  (252.9s)
+epoch  12/40  train_loss=1.6309  val_acc=0.6070  val_macro_f1=0.2678  (221.0s)
+epoch  13/40  train_loss=1.6458  val_acc=0.5240  val_macro_f1=0.2517  (211.1s)
+epoch  14/40  train_loss=1.5799  val_acc=0.5030  val_macro_f1=0.2419  (210.3s)
+epoch  15/40  train_loss=1.5457  val_acc=0.5542  val_macro_f1=0.2702  (219.6s)
+epoch  16/40  train_loss=1.4436  val_acc=0.6474  val_macro_f1=0.2805  (217.5s)
+epoch  17/40  train_loss=1.4712  val_acc=0.5989  val_macro_f1=0.2863  (209.5s)
+epoch  18/40  train_loss=1.4119  val_acc=0.5651  val_macro_f1=0.2714  (221.4s)
+epoch  19/40  train_loss=1.3832  val_acc=0.5520  val_macro_f1=0.2625  (838.0s)
+epoch  20/40  train_loss=1.2685  val_acc=0.6184  val_macro_f1=0.3015  (1250.1s)
+epoch  21/40  train_loss=1.2685  val_acc=0.6453  val_macro_f1=0.2976  (378.0s)
+epoch  22/40  train_loss=1.3486  val_acc=0.5044  val_macro_f1=0.2337  (143.6s)
+epoch  23/40  train_loss=1.3211  val_acc=0.5344  val_macro_f1=0.2676  (149.9s)
+epoch  24/40  train_loss=1.3865  val_acc=0.6339  val_macro_f1=0.3296  (161.4s)
+epoch  25/40  train_loss=1.2892  val_acc=0.5047  val_macro_f1=0.2749  (145.1s)
+epoch  26/40  train_loss=1.2834  val_acc=0.5578  val_macro_f1=0.2827  (145.6s)
+epoch  27/40  train_loss=1.3648  val_acc=0.6802  val_macro_f1=0.3424  (144.2s)
+epoch  28/40  train_loss=1.2048  val_acc=0.5433  val_macro_f1=0.2671  (147.0s)
+epoch  29/40  train_loss=1.1393  val_acc=0.6389  val_macro_f1=0.3373  (144.8s)
+epoch  30/40  train_loss=1.0572  val_acc=0.6392  val_macro_f1=0.3166  (155.6s)
+epoch  31/40  train_loss=1.0695  val_acc=0.3890  val_macro_f1=0.2186  (159.3s)
+epoch  32/40  train_loss=1.0561  val_acc=0.5446  val_macro_f1=0.2867  (150.8s)
+epoch  33/40  train_loss=1.1121  val_acc=0.4805  val_macro_f1=0.2941  (171.4s)
+epoch  34/40  train_loss=1.1741  val_acc=0.6215  val_macro_f1=0.3322  (170.6s)
+epoch  35/40  train_loss=1.0116  val_acc=0.6281  val_macro_f1=0.3219  (146.8s)
+epoch  36/40  train_loss=0.9759  val_acc=0.6872  val_macro_f1=0.3662  (149.9s)
+epoch  37/40  train_loss=0.9583  val_acc=0.7195  val_macro_f1=0.3726  (144.9s)
+epoch  38/40  train_loss=1.0614  val_acc=0.7055  val_macro_f1=0.3600  (149.6s)
+epoch  39/40  train_loss=1.0367  val_acc=0.6767  val_macro_f1=0.4003  (162.8s)
+epoch  40/40  train_loss=0.9165  val_acc=0.6458  val_macro_f1=0.3091  (149.0s)
+saved best checkpoint (val_macro_f1=0.4003) to E:\Agri-Assignment_01\outputs\models\dl_model.pt
+[dl_val] accuracy=0.6767 macro_f1=0.4003 weighted_f1=0.7220 mean_iou=0.3324
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/dl_val_*
+[dl_test] accuracy=0.5977 macro_f1=0.3324 weighted_f1=0.6553 mean_iou=0.2711
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/dl_test_*

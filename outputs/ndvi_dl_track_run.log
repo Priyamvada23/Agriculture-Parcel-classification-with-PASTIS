@@ -1,0 +1,23 @@
+CUDA requested but not available -> falling back to CPU (this will be slow; see README for running the full training on Google Colab).
+=== Track D: 1D temporal CNN on the NDVI series (device=cpu) ===
+Building NDVI tables (train=66, val=18 patches)...
+  train (167477, 46), val (49083, 46) in 995.7s
+model parameters: 248,660
+epoch   1/40  loss=0.8709  val(sampled) acc=0.3717 macroF1=0.2579
+epoch   5/40  loss=0.2397  val(sampled) acc=0.6494 macroF1=0.3860
+epoch  10/40  loss=0.1763  val(sampled) acc=0.6953 macroF1=0.3948
+epoch  15/40  loss=0.1396  val(sampled) acc=0.7205 macroF1=0.4059
+epoch  20/40  loss=0.1276  val(sampled) acc=0.7271 macroF1=0.4104
+epoch  25/40  loss=0.1218  val(sampled) acc=0.7251 macroF1=0.4068
+epoch  30/40  loss=0.1008  val(sampled) acc=0.7374 macroF1=0.4178
+epoch  35/40  loss=0.1024  val(sampled) acc=0.7559 macroF1=0.4210
+epoch  40/40  loss=0.1017  val(sampled) acc=0.7491 macroF1=0.4213
+saved best checkpoint (val-sampled macro-F1=0.4220)
+
+Evaluating on val (18 patches, full pixel grid)...
+[ndvi_dl_val] accuracy=0.7446 macro_f1=0.3849 weighted_f1=0.7698 mean_iou=0.3270
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ndvi_dl_val_*
+
+Evaluating on test (18 patches, full pixel grid)...
+[ndvi_dl_test] accuracy=0.7308 macro_f1=0.3520 weighted_f1=0.7558 mean_iou=0.3112
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ndvi_dl_test_*

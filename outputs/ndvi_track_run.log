@@ -1,0 +1,27 @@
+=== NDVI track: Random Forest on the ordered NDVI time series ===
+Building NDVI time-series table from 66 train patches...
+  167477 rows x 46 features (18 classes) in 29.2s
+
+Training Random Forest on NDVI series...
+  done in 137.5s
+
+Evaluating on val (18 patches, full pixel grid)...
+[ndvi_rf_val] accuracy=0.8315 macro_f1=0.4435 weighted_f1=0.8287 mean_iou=0.4479
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ndvi_rf_val_*
+
+Evaluating on test (18 patches, full pixel grid)...
+[ndvi_rf_test] accuracy=0.8257 macro_f1=0.3794 weighted_f1=0.8178 mean_iou=0.4180
+  saved metrics to E:\Agri-Assignment_01\outputs\metrics/ndvi_rf_test_*
+
+Top 10 most informative acquisition dates:
+ feature       date  importance
+ndvi_t28 2019-06-17    0.049454
+ndvi_t25 2019-06-02    0.047877
+ndvi_t24 2019-05-23    0.037862
+ndvi_t37 2019-08-21    0.035086
+ndvi_t23 2019-05-13    0.032514
+ndvi_t21 2019-04-18    0.029399
+ndvi_t27 2019-06-12    0.029281
+ndvi_t19 2019-03-29    0.028674
+ndvi_t12 2019-01-28    0.028111
+ndvi_t18 2019-03-24    0.027357
